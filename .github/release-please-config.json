@@ -7,14 +7,7 @@
       "include-component-in-tag": false,
       "include-v-in-tag": true,
       "skip-changelog": true,
-      "bump-minor-pre-major": true,
-      "extra-files": [
-        {
-          "type": "json",
-          "path": "pkg/palette/palette.json",
-          "jsonpath": "$.version"
-        }
-      ]
+      "bump-minor-pre-major": true
     }
   }
 }

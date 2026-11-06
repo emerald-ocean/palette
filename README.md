@@ -42,7 +42,7 @@ make build vet test test-race lint check
 
 ## Releases
 
-Releases are automated with [release-please](https://github.com/googleapis/release-please). Every push to `main` updates a release PR with the next version, worked out from the conventional commit messages. Merging that PR tags `vX.Y.Z`, publishes a GitHub Release with the notes, and bumps the version in `pkg/palette/palette.json`.
+Releases are automated with [release-please](https://github.com/googleapis/release-please). Every push to `main` updates a release PR with the next version, worked out from the conventional commit messages. Merging that PR tags `vX.Y.Z` and publishes a GitHub Release with the notes. The tag is the only place the version lives: `emerald-gen` reads it from its Go build info, so `go run …/emerald-gen@vX.Y.Z` reports exactly that version.
 
 ## Preview
 

@@ -15,7 +15,6 @@ const testRules = `"rules": {
 func testDocument(glow string) string {
 	return `{
 	"name": "Test",
-	"version": "v1",
 	"space": "oklch",
 	"groups": {
 		"abyss": {"abyss": {"oklch": [0.165, 0.033, 166], "hex": "#01130b"}},

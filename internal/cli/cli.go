@@ -104,6 +104,15 @@ func generate(args []string) error {
 }
 
 func load(path string) (palette.Palette, error) {
+	p, err := parse(path)
+	if err != nil {
+		return palette.Palette{}, err
+	}
+	p.Version = version()
+	return p, nil
+}
+
+func parse(path string) (palette.Palette, error) {
 	if path == "" {
 		return palette.Default()
 	}

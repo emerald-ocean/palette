@@ -38,11 +38,10 @@ type Palette struct {
 }
 
 type document struct {
-	Name    string                               `json:"name"`
-	Version string                               `json:"version"`
-	Space   string                               `json:"space"`
-	Groups  map[string]map[string]documentColour `json:"groups"`
-	Rules   Rules                                `json:"rules"`
+	Name   string                               `json:"name"`
+	Space  string                               `json:"space"`
+	Groups map[string]map[string]documentColour `json:"groups"`
+	Rules  Rules                                `json:"rules"`
 }
 
 type documentColour struct {
@@ -67,7 +66,6 @@ func Parse(data []byte) (Palette, error) {
 	}
 	p := Palette{
 		Name:    doc.Name,
-		Version: doc.Version,
 		Colours: map[string]Colour{},
 		Rules:   doc.Rules,
 	}
