@@ -42,6 +42,7 @@ func TestRun(t *testing.T) {
 			wantErr:    "1 problems",
 			wantRules:  true,
 		},
+		{name: "report", args: []string{"report"}, wantStdout: "deuteranopia"},
 		{name: "generate without flags", args: []string{"generate"}, wantErr: "needs -template and -out"},
 		{name: "generate", args: []string{"generate", "-template", tmpl, "-out", out}},
 	}

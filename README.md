@@ -30,7 +30,9 @@ go run github.com/emerald-ocean/palette/cmd/emerald-gen@<version> generate -temp
 - `{{alpha .glow 0.16}}`: a colour with an alpha channel, e.g. `#76dffb29`
 - `{{version}}`: the palette version
 
-Both commands take `-palette path/to/palette.json` to use a local file instead of the embedded palette.
+`report` prints the APCA lightness contrast (Lc) of every colour on each background, and the ΔE of every neighbour pair as seen with normal vision, protanopia, deuteranopia and tritanopia (Machado et al. 2009). It informs the rules but does not fail.
+
+All commands take `-palette path/to/palette.json` to use a local file instead of the embedded palette.
 
 ## Development
 

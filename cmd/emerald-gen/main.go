@@ -7,7 +7,11 @@ import (
 	"fmt"
 	"io"
 	"log/slog"
+	"math"
 	"os"
+	"slices"
+	"strings"
+	"text/tabwriter"
 
 	"github.com/emerald-ocean/palette"
 )
@@ -17,6 +21,7 @@ const usage = `usage: emerald-gen <command> [flags]
 commands:
   check     check the palette against its rules
   generate  render a template with the palette's colours
+  report    print APCA contrast and colour-blindness separation
 `
 
 var errRules = errors.New("palette breaks its rules")
@@ -38,6 +43,8 @@ func run(
 	switch args[0] {
 	case "check":
 		return check(args[1:], stdout)
+	case "report":
+		return report(args[1:], stdout)
 	case "generate":
 		return generate(args[1:])
 	default:
@@ -111,4 +118,63 @@ func load(path string) (palette.Palette, error) {
 		return palette.Palette{}, fmt.Errorf("read palette: %w", err)
 	}
 	return palette.Parse(data)
+}
+
+func report(
+	args []string,
+	stdout io.Writer,
+) error {
+	fs := flag.NewFlagSet("report", flag.ContinueOnError)
+	path := fs.String("palette", "", "palette JSON file (default: the embedded palette)")
+	if err := fs.Parse(args); err != nil {
+		return fmt.Errorf("parse report flags: %w", err)
+	}
+	p, err := load(*path)
+	if err != nil {
+		return err
+	}
+	rgb := make(map[string]palette.RGB, len(p.Colours))
+	for name, c := range p.Colours {
+		v, err := palette.ParseHex(c.Hex)
+		if err != nil {
+			return fmt.Errorf("report colour %s: %w", name, err)
+		}
+		rgb[name] = v
+	}
+
+	rows := [][]string{append([]string{"APCA Lc"}, p.Rules.Backgrounds...)}
+	for _, name := range p.Names() {
+		if slices.Contains(p.Rules.Backgrounds, name) {
+			continue
+		}
+		row := []string{name}
+		for _, bg := range p.Rules.Backgrounds {
+			row = append(row, fmt.Sprintf("%.1f", math.Abs(palette.APCA(rgb[name], rgb[bg]))))
+		}
+		rows = append(rows, row)
+	}
+	header := []string{"Neighbour ΔE"}
+	for _, v := range palette.Visions {
+		header = append(header, v.String())
+	}
+	rows = append(rows, nil, header)
+	for _, pair := range p.Rules.Neighbours {
+		row := []string{pair[0] + " " + pair[1]}
+		for _, v := range palette.Visions {
+			a, b := palette.Simulate(rgb[pair[0]], v), palette.Simulate(rgb[pair[1]], v)
+			row = append(row, fmt.Sprintf("%.3f", a.DeltaE(b)))
+		}
+		rows = append(rows, row)
+	}
+
+	w := tabwriter.NewWriter(stdout, 0, 0, 2, ' ', tabwriter.AlignRight)
+	for _, row := range rows {
+		if _, err := io.WriteString(w, strings.Join(row, "\t")+"\t\n"); err != nil {
+			return fmt.Errorf("write report row: %w", err)
+		}
+	}
+	if err := w.Flush(); err != nil {
+		return fmt.Errorf("write report: %w", err)
+	}
+	return nil
 }
