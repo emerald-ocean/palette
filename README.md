@@ -37,7 +37,7 @@ All commands take `-palette path/to/palette.json` to use a local file instead of
 ## Development
 
 ```sh
-make build vet test test-race lint
+make build vet test test-race lint check
 ```
 
 ## Preview
