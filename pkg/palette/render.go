@@ -5,6 +5,8 @@ import (
 	"io"
 	"math"
 	"text/template"
+
+	"github.com/emerald-ocean/palette/pkg/colour"
 )
 
 // Render executes the template text with the palette's colours by name and writes the result to w.
@@ -33,7 +35,7 @@ func alpha(
 	hex string,
 	a float64,
 ) (string, error) {
-	if _, err := ParseHex(hex); err != nil {
+	if _, err := colour.ParseHex(hex); err != nil {
 		return "", fmt.Errorf("alpha: %w", err)
 	}
 	if a < 0 || a > 1 {

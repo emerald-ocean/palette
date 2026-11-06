@@ -3,6 +3,8 @@ package palette
 import (
 	"fmt"
 	"slices"
+
+	"github.com/emerald-ocean/palette/pkg/colour"
 )
 
 // Check returns every rule the palette breaks, or nil if it meets them all.
@@ -30,7 +32,7 @@ func (p Palette) checkContrast() []error {
 			errs = append(errs, fmt.Errorf("contrast: unknown background %q", bgName))
 			continue
 		}
-		bgRGB, err := ParseHex(bg.Hex)
+		bgRGB, err := colour.ParseHex(bg.Hex)
 		if err != nil {
 			errs = append(errs, fmt.Errorf("contrast background %s: %w", bgName, err))
 			continue
@@ -40,12 +42,12 @@ func (p Palette) checkContrast() []error {
 			if c.Group == bg.Group || slices.Contains(p.Rules.Backgrounds, name) {
 				continue
 			}
-			fg, err := ParseHex(c.Hex)
+			fg, err := colour.ParseHex(c.Hex)
 			if err != nil {
 				errs = append(errs, fmt.Errorf("contrast foreground %s: %w", name, err))
 				continue
 			}
-			if ratio := Contrast(fg, bgRGB); ratio < p.Rules.MinContrast {
+			if ratio := colour.Contrast(fg, bgRGB); ratio < p.Rules.MinContrast {
 				errs = append(errs, fmt.Errorf(
 					"%s on %s: contrast %.2f:1 is below %.2f:1",
 					name,

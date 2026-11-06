@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"sort"
+
+	"github.com/emerald-ocean/palette/pkg/colour"
 )
 
 //go:embed palette.json
@@ -14,7 +16,7 @@ var embedded []byte
 type Colour struct {
 	Name  string
 	Group string
-	OKLCH OKLCH
+	OKLCH colour.OKLCH
 	Hex   string
 	Use   string
 }
@@ -77,7 +79,7 @@ func Parse(data []byte) (Palette, error) {
 			p.Colours[name] = Colour{
 				Name:  name,
 				Group: group,
-				OKLCH: OKLCH{L: c.OKLCH[0], C: c.OKLCH[1], H: c.OKLCH[2]},
+				OKLCH: colour.OKLCH{L: c.OKLCH[0], C: c.OKLCH[1], H: c.OKLCH[2]},
 				Hex:   c.Hex,
 				Use:   c.Use,
 			}

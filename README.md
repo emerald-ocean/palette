@@ -2,7 +2,7 @@
 
 The single source of truth for the Emerald Ocean colours: a dark palette taken from a breaking emerald wave, where green dominates the blue.
 
-`palette.json` holds 15 colours in four groups (abyss, foam, kelp, reef). Each colour is defined in OKLCH, with its sRGB hex and what it is used for. The editor themes (`emerald-ocean.nvim`, `emerald-ocean-vscode`) are built from this file.
+`pkg/palette/palette.json` holds 15 colours in four groups (abyss, foam, kelp, reef). Each colour is defined in OKLCH, with its sRGB hex and what it is used for. The editor themes (`emerald-ocean.nvim`, `emerald-ocean-vscode`) are built from this file.
 
 | Group | Colours |
 |-------|---------|
@@ -13,7 +13,7 @@ The single source of truth for the Emerald Ocean colours: a dark palette taken f
 
 ## Rules
 
-The `rules` section of `palette.json` sets the readability rules every colour must meet: a minimum contrast against the backgrounds, and a minimum perceptual distance (OKLab ΔE) between colours that commonly sit next to each other in code.
+The `rules` section of `pkg/palette/palette.json` sets the readability rules every colour must meet: a minimum contrast against the backgrounds, and a minimum perceptual distance (OKLab ΔE) between colours that commonly sit next to each other in code.
 
 ## Generator
 

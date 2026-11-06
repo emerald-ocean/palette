@@ -13,7 +13,8 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/emerald-ocean/palette"
+	"github.com/emerald-ocean/palette/pkg/colour"
+	"github.com/emerald-ocean/palette/pkg/palette"
 )
 
 const usage = `usage: emerald-gen <command> [flags]
@@ -133,9 +134,9 @@ func report(
 	if err != nil {
 		return err
 	}
-	rgb := make(map[string]palette.RGB, len(p.Colours))
+	rgb := make(map[string]colour.RGB, len(p.Colours))
 	for name, c := range p.Colours {
-		v, err := palette.ParseHex(c.Hex)
+		v, err := colour.ParseHex(c.Hex)
 		if err != nil {
 			return fmt.Errorf("report colour %s: %w", name, err)
 		}
@@ -149,19 +150,19 @@ func report(
 		}
 		row := []string{name}
 		for _, bg := range p.Rules.Backgrounds {
-			row = append(row, fmt.Sprintf("%.1f", math.Abs(palette.APCA(rgb[name], rgb[bg]))))
+			row = append(row, fmt.Sprintf("%.1f", math.Abs(colour.APCA(rgb[name], rgb[bg]))))
 		}
 		rows = append(rows, row)
 	}
 	header := []string{"Neighbour ΔE"}
-	for _, v := range palette.Visions {
+	for _, v := range colour.Visions {
 		header = append(header, v.String())
 	}
 	rows = append(rows, nil, header)
 	for _, pair := range p.Rules.Neighbours {
 		row := []string{pair[0] + " " + pair[1]}
-		for _, v := range palette.Visions {
-			a, b := palette.Simulate(rgb[pair[0]], v), palette.Simulate(rgb[pair[1]], v)
+		for _, v := range colour.Visions {
+			a, b := colour.Simulate(rgb[pair[0]], v), colour.Simulate(rgb[pair[1]], v)
 			row = append(row, fmt.Sprintf("%.3f", a.DeltaE(b)))
 		}
 		rows = append(rows, row)
