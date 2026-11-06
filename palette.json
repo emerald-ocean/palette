@@ -4,27 +4,110 @@
   "space": "oklch",
   "groups": {
     "abyss": {
-      "abyss": { "oklch": [0.165, 0.033, 166], "hex": "#01130b", "use": "editor, terminal, tmux background" },
-      "trench": { "oklch": [0.20, 0.042, 166], "hex": "#001c12", "use": "cursorline, floats, statusline, tmux bar" },
-      "current": { "oklch": [0.25, 0.050, 165], "hex": "#02291c", "use": "visual selection, popup menu, borders" },
-      "shoal": { "oklch": [0.45, 0.040, 166], "hex": "#405d50", "use": "line numbers, indent guides, popup selected" }
+      "abyss": {
+        "oklch": [0.165, 0.033, 166],
+        "hex": "#01130b",
+        "use": "editor, terminal, tmux background"
+      },
+      "trench": {
+        "oklch": [0.20, 0.042, 166],
+        "hex": "#001c12",
+        "use": "cursorline, floats, statusline, tmux bar"
+      },
+      "current": {
+        "oklch": [0.25, 0.050, 165],
+        "hex": "#02291c",
+        "use": "visual selection, popup menu, borders"
+      },
+      "shoal": {
+        "oklch": [0.45, 0.040, 166],
+        "hex": "#405d50",
+        "use": "line numbers, indent guides, popup selected"
+      }
     },
     "foam": {
-      "white": { "oklch": [0.95, 0.004, 250], "hex": "#eceff1", "use": "type definitions, struct field names, strings" },
-      "foam": { "oklch": [0.88, 0.018, 215], "hex": "#cbdbdf", "use": "variables, parameters, default text" },
-      "silt": { "oklch": [0.70, 0.032, 166], "hex": "#8ca59a", "use": "punctuation, operators, comments" }
+      "white": {
+        "oklch": [0.95, 0.004, 250],
+        "hex": "#eceff1",
+        "use": "type definitions, struct field names, strings"
+      },
+      "foam": {
+        "oklch": [0.88, 0.018, 215],
+        "hex": "#cbdbdf",
+        "use": "variables, parameters, default text"
+      },
+      "silt": {
+        "oklch": [0.70, 0.032, 166],
+        "hex": "#8ca59a",
+        "use": "punctuation, operators, comments"
+      }
     },
     "kelp": {
-      "emerald": { "oklch": [0.86, 0.123, 160], "hex": "#83eab5", "use": "functions, methods, hint, diff add" },
-      "verdigris": { "oklch": [0.77, 0.105, 135], "hex": "#97c37f", "use": "keywords, builtin types" },
-      "seaglass": { "oklch": [0.81, 0.085, 192], "hex": "#7bd3cf", "use": "custom types, package members" },
-      "glow": { "oklch": [0.85, 0.105, 218], "hex": "#76dffb", "use": "cursor, search, yank, matching bracket, references, escapes, info" },
-      "tide": { "oklch": [0.64, 0.090, 245], "hex": "#5b92bf", "use": "fields, packages" }
+      "emerald": {
+        "oklch": [0.86, 0.123, 160],
+        "hex": "#83eab5",
+        "use": "functions, methods, hint, diff add"
+      },
+      "verdigris": {
+        "oklch": [0.77, 0.105, 135],
+        "hex": "#97c37f",
+        "use": "keywords, builtin types"
+      },
+      "seaglass": {
+        "oklch": [0.81, 0.085, 192],
+        "hex": "#7bd3cf",
+        "use": "custom types, package members"
+      },
+      "glow": {
+        "oklch": [0.85, 0.105, 218],
+        "hex": "#76dffb",
+        "use": "cursor, search, yank, matching bracket, references, escapes, info"
+      },
+      "tide": {
+        "oklch": [0.64, 0.090, 245],
+        "hex": "#5b92bf",
+        "use": "fields, packages"
+      }
     },
     "reef": {
-      "coral": { "oklch": [0.80, 0.100, 35], "hex": "#f7a792", "use": "numbers, booleans, nil, constants, warnings, TODO" },
-      "urchin": { "oklch": [0.66, 0.150, 20], "hex": "#df676b", "use": "errors, diff delete" },
-      "anemone": { "oklch": [0.76, 0.090, 300], "hex": "#baa4e2", "use": "macros, attributes, decorators" }
+      "coral": {
+        "oklch": [0.80, 0.100, 35],
+        "hex": "#f7a792",
+        "use": "numbers, booleans, nil, constants, warnings, TODO"
+      },
+      "urchin": {
+        "oklch": [0.66, 0.150, 20],
+        "hex": "#df676b",
+        "use": "errors, diff delete"
+      },
+      "anemone": {
+        "oklch": [0.76, 0.090, 300],
+        "hex": "#baa4e2",
+        "use": "macros, attributes, decorators"
+      }
     }
+  },
+  "rules": {
+    "minContrast": 4.5,
+    "minDeltaE": 0.10,
+    "backgrounds": ["abyss", "current"],
+    "neighbours": [
+      ["tide", "emerald"],
+      ["foam", "tide"],
+      ["verdigris", "white"],
+      ["verdigris", "tide"],
+      ["tide", "seaglass"],
+      ["coral", "seaglass"],
+      ["white", "seaglass"],
+      ["verdigris", "coral"],
+      ["emerald", "white"],
+      ["foam", "verdigris"],
+      ["white", "coral"],
+      ["foam", "emerald"],
+      ["tide", "silt"],
+      ["verdigris", "silt"],
+      ["verdigris", "emerald"],
+      ["seaglass", "verdigris"]
+]
   }
 }
