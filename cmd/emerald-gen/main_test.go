@@ -69,7 +69,7 @@ func TestRun(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ReadFile() error = %v", err)
 	}
-	if expected := `bg = "#01130b" -- palette v10`; string(got) != expected {
+	if expected := `bg = "#01130b" -- palette 0.1.0`; string(got) != expected {
 		t.Errorf("generated file = %q, want %q", got, expected)
 	}
 }
