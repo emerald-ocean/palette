@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"github.com/emerald-ocean/palette/pkg/palette"
 )
 
 const testTemplate = `bg = "{{.abyss}}" -- palette {{version}}`
@@ -69,7 +71,11 @@ func TestRun(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ReadFile() error = %v", err)
 	}
-	if expected := `bg = "#01130b" -- palette 0.1.0`; string(got) != expected {
+	p, err := palette.Default()
+	if err != nil {
+		t.Fatalf("Default() error = %v", err)
+	}
+	if expected := `bg = "#01130b" -- palette ` + p.Version; string(got) != expected {
 		t.Errorf("generated file = %q, want %q", got, expected)
 	}
 }
