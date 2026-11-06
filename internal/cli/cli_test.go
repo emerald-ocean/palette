@@ -1,4 +1,4 @@
-package main
+package cli
 
 import (
 	"errors"
@@ -49,18 +49,18 @@ func TestRun(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			var stdout strings.Builder
-			err := run(tt.args, &stdout)
+			err := Run(tt.args, &stdout)
 			if tt.wantErr == "" && err != nil {
-				t.Fatalf("run() error = %v", err)
+				t.Fatalf("Run() error = %v", err)
 			}
 			if tt.wantErr != "" && (err == nil || !strings.Contains(err.Error(), tt.wantErr)) {
-				t.Errorf("run() error = %v, want it to contain %q", err, tt.wantErr)
+				t.Errorf("Run() error = %v, want it to contain %q", err, tt.wantErr)
 			}
 			if got := errors.Is(err, errRules); got != tt.wantRules {
-				t.Errorf("errors.Is(run(), errRules) = %v, want %v", got, tt.wantRules)
+				t.Errorf("errors.Is(Run(), errRules) = %v, want %v", got, tt.wantRules)
 			}
 			if !strings.Contains(stdout.String(), tt.wantStdout) {
-				t.Errorf("run() stdout = %q, want it to contain %q", stdout.String(), tt.wantStdout)
+				t.Errorf("Run() stdout = %q, want it to contain %q", stdout.String(), tt.wantStdout)
 			}
 		})
 	}
