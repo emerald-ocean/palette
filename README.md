@@ -54,7 +54,7 @@ Releases are automated with [release-please](https://github.com/googleapis/relea
 
 ## Preview
 
-`preview/index.html` shows the palette on a full Go file in a Neovim/tmux mock-up. Open it in a browser.
+`preview/index.html` shows the palette on a full Go file in a Neovim/tmux mock-up, and `preview/scales.html` shows every family with its shades, cores, contrast and colour-blind separation, and how the tests work. Open them in a browser.
 
 ## Images
 

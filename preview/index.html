@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Emerald Ocean v10</title>
+<title>Emerald Ocean v0.2.0</title>
 <style>
 :root {
-  /* abyss: backgrounds */
-  --abyss:#01130b; --trench:#001c12; --current:#02291c; --shoal:#405d50;
-  /* foam: whites, text, lowlights */
-  --white:#eceff1; --foam:#cbdbdf; --silt:#8ca59a;
-  /* kelp: main family */
-  --emerald:#83eab5; --verdigris:#97c37f; --seaglass:#7bd3cf; --glow:#76dffb; --tide:#5b92bf;
-  /* reef: rare accents */
-  --coral:#f7a792; --urchin:#df676b; --anemone:#baa4e2;
+  --abyss:#01130b; --trench:#02291c; --current:#163b2c; --shoal:#2f5042;
+  --white:#dbeaeb; --foam:#c6d4d5; --silt:#9ab1ab; --punct:#aeb4b4; --var:#dbeaeb; --linenr:#6d7e7d;
+  --emerald:#54f9a3; --fnc:#54f9a3; --kw:#54f9a3; --kwdecl:#54f9a3; --tybuiltin:#54f9a3; --verdigris:#79cb70;
+  --seaglass:#47d4db; --tydef:#47d4db; --pkg:#61aee9; --tide:#84cef9;
+  --value:#dbeaeb; --coral:#f5b1aa; --urchin:#f66c6d; --anemone:#c6b1f0;
+  --glow:#76dffb; --jelly:#f59ae1; --refbg:#431f3c; --searchbg:#06343e; --incsearch:#54f9a3; --yankbg:#54f9a3;
 }
 .cursor { background:var(--glow); color:var(--abyss); }
-.ref { background:color-mix(in oklch, var(--glow) 22%, transparent); border-radius:2px; }
-.match { color:var(--glow) !important; font-weight:bold; background:color-mix(in oklch, var(--glow) 20%, transparent); }
-.ln.yank .code { background:var(--glow); }
+.ref { background:var(--refbg, color-mix(in oklch, var(--glow) 22%, transparent)); border-radius:2px; }
+.match { color:var(--jelly, var(--glow)) !important; font-weight:bold; background:var(--refbg, color-mix(in oklch, var(--glow) 20%, transparent)); }
+.ln.yank .code { background:var(--yankbg, var(--glow)); }
 .ln.yank .code * { color:var(--abyss) !important; background:transparent !important; text-decoration:none !important; }
 .moments { color:var(--silt); font-size:12px; margin:.6rem 0 0; }
 * { box-sizing:border-box; }
@@ -35,7 +33,7 @@ body { background:#050807; color:var(--foam); font:13.5px/1.6 "JetBrains Mono","
 .buf { tab-size:4; -moz-tab-size:4; white-space:pre; overflow-x:auto; padding:.25rem 0; }
 .ln { display:flex; }
 .sign { width:1.2em; text-align:center; flex:none; }
-.nr { width:3.2em; text-align:right; padding-right:1em; color:var(--shoal); flex:none; }
+.nr { width:3.2em; text-align:right; padding-right:1em; color:var(--linenr, var(--shoal)); flex:none; }
 .code { flex:1; padding-right:1rem; }
 .ln.cur { background:var(--trench); }
 .ln.cur .nr { color:var(--foam); }
@@ -57,26 +55,27 @@ body { background:#050807; color:var(--foam); font:13.5px/1.6 "JetBrains Mono","
 .tmux .win.on { color:var(--glow); }
 .tmux .grow { flex:1; }
 /* syntax */
-.kw { color:var(--verdigris); }
-.fn { color:var(--emerald); }
+.kw { color:var(--kw, var(--verdigris)); }
+.kwd { color:var(--kwdecl, var(--kw, var(--verdigris))); }
+.fn { color:var(--fnc, var(--emerald)); }
 .ty { color:var(--seaglass); }
-.tyb { color:var(--verdigris); }
-.tyd { color:var(--white); }
-.va { color:var(--foam); }
-.pa { color:var(--foam); font-style:italic; }
+.tyb { color:var(--tybuiltin, var(--verdigris)); }
+.tyd { color:var(--tydef, var(--white)); }
+.va { color:var(--var, var(--foam)); }
+.pa { color:var(--var, var(--foam)); font-style:italic; }
 .pr { color:var(--tide); }
 .prd { color:var(--white); }
-.md { color:var(--tide); }
+.md { color:var(--pkg, var(--tide)); }
 .md { font-style:italic; }
 .st { color:var(--white); }
 .esc { color:var(--glow); }
-.nu { color:var(--coral); }
-.cn { color:var(--coral); }
+.nu { color:var(--value, var(--coral)); }
+.cn { color:var(--value, var(--coral)); }
 .cm { color:var(--silt); font-style:italic; }
-.pu { color:var(--silt); }
+.pu { color:var(--punct, var(--silt)); }
 .todo { color:var(--abyss); background:var(--coral); font-style:normal; }
-.search { background:color-mix(in oklch, var(--glow) 16%, transparent); }
-.incsearch { color:var(--abyss); background:var(--glow); }
+.search { background:var(--searchbg, color-mix(in oklch, var(--glow) 16%, transparent)); }
+.incsearch { color:var(--abyss); background:var(--incsearch, var(--glow)); }
 </style>
 </head>
 <body>
@@ -283,6 +282,7 @@ func (d Direction) String() string {
 </script>
 
 <script>
+const DECL = new Set("const func import interface package struct type var".split(" "));
 const KW = new Set("break case chan const continue default defer else fallthrough for func go goto if import interface map package range return select struct switch type var".split(" "));
 const CONSTS = new Set(["true", "false", "nil", "iota"]);
 const BUILTIN_TYPES = new Set("any bool byte complex64 complex128 error float32 float64 int int8 int16 int32 int64 rune string uint uint8 uint16 uint32 uint64 uintptr".split(" "));
@@ -358,7 +358,7 @@ function classify(toks) {
 
     if (t.v === "func") {
       if (depth === 0) params = new Set();
-      t.c = "kw";
+      t.c = "kwd";
       let j = k + 1;
       if (at(j).v === "(") j = markParams(j);
       if (at(j).t === "id" && !KW.has(at(j).v)) { at(j).c = "fn"; j++; }
@@ -366,7 +366,7 @@ function classify(toks) {
       if (at(j).v === "(") markParams(j);
       continue;
     }
-    if (KW.has(t.v)) { t.c = "kw"; continue; }
+    if (KW.has(t.v)) { t.c = DECL.has(t.v) ? "kwd" : "kw"; continue; }
     if (p.v === "type") { t.c = "tyd"; continue; }
     if (t.v === "iota") { t.c = "tyb"; continue; }
     if (CONSTS.has(t.v)) { t.c = "nu"; continue; }

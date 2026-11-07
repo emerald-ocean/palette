@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Emerald Ocean v0.2.0: colour scales</title>
+<style>
+body { background:#01130b; color:#c6d4d5; font:13px/1.5 "JetBrains Mono","SF Mono",Menlo,monospace; margin:0; padding:1.5rem 2rem; }
+h1 { font-size:18px; font-weight:normal; color:#dcebec; }
+h2 { font-size:14px; font-weight:normal; color:#dcebec; margin:1.6rem 0 .5rem; }
+p, .note { color:#9ab1ab; max-width:1100px; }
+a { color:#76dffb; }
+.family { display:grid; grid-template-columns:6.5em 1fr 1fr 2.5em 1fr 1fr 1fr; gap:.5rem; align-items:stretch; max-width:1300px; margin-bottom:.6rem; }
+.family.plain { grid-template-columns:6.5em repeat(5, 1fr); }
+.tierhead { display:grid; grid-template-columns:6.5em 1fr 1fr 2.5em 1fr 1fr 1fr; gap:.5rem; max-width:1300px; color:#9ab1ab; font-size:11.5px; }
+.tierhead div:nth-child(2) { grid-column:2 / span 2; } .tierhead div:nth-child(3) { grid-column:5 / span 3; }
+.gap { border-left:1px dashed #163b2c; border-right:1px dashed #163b2c; }
+.fname { color:#dcebec; align-self:center; }
+.sw { border-radius:6px; overflow:hidden; background:#02291c; border:1px solid #163b2c; }
+.sw.core { border:2px solid #dcebec; }
+.chip { height:44px; display:flex; align-items:center; justify-content:center; font-size:12px; }
+.meta { padding:.35rem .5rem; font-size:11.5px; color:#9ab1ab; }
+.meta b { color:#dcebec; font-weight:normal; }
+.meta .role { color:#c6d4d5; display:block; margin-top:.15rem; }
+.neg { margin-top:.35rem; padding:.15rem .4rem; border-radius:3px; color:#001c12; font-weight:bold; font-size:11px; }
+table { border-collapse:collapse; margin:.4rem 0 1rem; }
+td, th { padding:.2rem .8rem; text-align:right; border-bottom:1px solid #02291c; }
+th { color:#dcebec; font-weight:normal; } td:first-child, th:first-child { text-align:left; }
+.bad { color:#ef6567; } .ok { color:#53f9a3; } .warn { color:#f5b1aa; }
+.demo { display:inline-block; padding:.1rem .5rem; border-radius:3px; margin:.15rem .4rem .15rem 0; }
+</style>
+</head>
+<body>
+<h1>Emerald Ocean v0.2.0: hue families</h1>
+<p>Each accent family has a <b>dark pair</b> (tints for backgrounds and highlights) and a <b>bright trio</b> (muted, core, bright), with the muddy middle left empty. The framed shade is the core of each family. Lc is APCA contrast on the background (abyss1). "Negative" is the colour used as a background with dark text on it. <a href="index.html">← code preview</a></p>
+<div class="tierhead"><div></div><div>dark: tints</div><div>bright: text</div></div>
+<div class="family"><div class="fname">emerald</div>
+<div class="sw "><div class="chip" style="background:#052f1a;color:#dcebec">emerald1</div><div class="meta"><b>#052f1a</b> Lc 0.0<br>oklch 0.27 0.060 156.4<span class="role">tint: diff add line</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#074628;color:#dcebec">emerald2</div><div class="meta"><b>#074628</b> Lc 0.0<br>oklch 0.35 0.080 156.4<span class="role">tint: stronger highlight</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#35b977;color:#01130b">emerald3</div><div class="meta"><b>#35b977</b> Lc 52.6<br>oklch 0.70 0.150 156.4<span class="role">muted</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#54f9a3;color:#01130b">emerald4 ★</div><div class="meta"><b>#54f9a3</b> Lc 86.0<br>oklch 0.876 0.182 156.4<span class="role">keywords, functions, builtin types, current search match, yank flash</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#bafed3;color:#01130b">emerald5</div><div class="meta"><b>#bafed3</b> Lc 96.8<br>oklch 0.94 0.090 156.4<span class="role">bright</span>
+</div></div>
+</div>
+<div class="family"><div class="fname">kelp</div>
+<div class="sw "><div class="chip" style="background:#142e11;color:#dcebec">kelp1</div><div class="meta"><b>#142e11</b> Lc 0.0<br>oklch 0.27 0.060 141.8<span class="role">tint</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#1f451b;color:#dcebec">kelp2</div><div class="meta"><b>#1f451b</b> Lc 0.0<br>oklch 0.35 0.080 141.8<span class="role">tint</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#61a659;color:#01130b">kelp3</div><div class="meta"><b>#61a659</b> Lc 45.4<br>oklch 0.66 0.130 141.8<span class="role">muted</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#79cb70;color:#01130b">kelp4 ★</div><div class="meta"><b>#79cb70</b> Lc 63.8<br>oklch 0.769 0.150 141.8<span class="role">unassigned</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#98e98f;color:#01130b">kelp5</div><div class="meta"><b>#98e98f</b> Lc 81.1<br>oklch 0.86 0.145 141.8<span class="role">bright</span>
+</div></div>
+</div>
+<div class="family"><div class="fname">lagoon</div>
+<div class="sw "><div class="chip" style="background:#012d2f;color:#dcebec">lagoon1</div><div class="meta"><b>#012d2f</b> Lc 0.0<br>oklch 0.27 0.045 199.6<span class="role">tint</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#0a4346;color:#dcebec">lagoon2</div><div class="meta"><b>#0a4346</b> Lc 0.0<br>oklch 0.35 0.055 199.6<span class="role">tint</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#40b1b6;color:#01130b">lagoon3</div><div class="meta"><b>#40b1b6</b> Lc 51.5<br>oklch 0.70 0.100 199.6<span class="role">muted</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#47d4db;color:#01130b">lagoon4 ★</div><div class="meta"><b>#47d4db</b> Lc 69.3<br>oklch 0.80 0.118 199.6<span class="role">types</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#87f2f8;color:#01130b">lagoon5</div><div class="meta"><b>#87f2f8</b> Lc 88.3<br>oklch 0.90 0.100 199.6<span class="role">bright</span>
+</div></div>
+</div>
+<div class="family"><div class="fname">sea</div>
+<div class="sw "><div class="chip" style="background:#052941;color:#dcebec">sea1</div><div class="meta"><b>#052941</b> Lc 0.0<br>oklch 0.27 0.060 243.6<span class="role">tint: diff change line</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#083e61;color:#dcebec">sea2</div><div class="meta"><b>#083e61</b> Lc 0.0<br>oklch 0.35 0.080 243.6<span class="role">tint</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#4a93ca;color:#01130b">sea3</div><div class="meta"><b>#4a93ca</b> Lc 40.8<br>oklch 0.64 0.110 243.6<span class="role">muted</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#61aee9;color:#01130b">sea4 ★</div><div class="meta"><b>#61aee9</b> Lc 54.4<br>oklch 0.725 0.115 243.6<span class="role">packages</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#84cef9;color:#01130b">sea5</div><div class="meta"><b>#84cef9</b> Lc 71.2<br>oklch 0.819 0.095 234.9<span class="role">fields</span>
+</div></div>
+</div>
+<div class="family"><div class="fname">reef</div>
+<div class="sw "><div class="chip" style="background:#3f1918;color:#dcebec">reef1</div><div class="meta"><b>#3f1918</b> Lc 0.0<br>oklch 0.27 0.060 24<span class="role">tint: error line, diff delete line</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#612422;color:#dcebec">reef2</div><div class="meta"><b>#612422</b> Lc 0.0<br>oklch 0.35 0.090 24<span class="role">tint</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#f66c6d;color:#01130b">reef3</div><div class="meta"><b>#f66c6d</b> Lc 46.9<br>oklch 0.70 0.170 22<span class="role">errors</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#f5b1aa;color:#01130b">reef4 ★</div><div class="meta"><b>#f5b1aa</b> Lc 69.2<br>oklch 0.823 0.081 26.1<span class="role">warnings, TODO</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#fed2cb;color:#01130b">reef5</div><div class="meta"><b>#fed2cb</b> Lc 84.9<br>oklch 0.90 0.050 30<span class="role">bright</span>
+</div></div>
+</div>
+<div class="family"><div class="fname">anemone</div>
+<div class="sw "><div class="chip" style="background:#2b1f3f;color:#dcebec">anemone1</div><div class="meta"><b>#2b1f3f</b> Lc 0.0<br>oklch 0.27 0.060 300<span class="role">tint</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#41305e;color:#dcebec">anemone2</div><div class="meta"><b>#41305e</b> Lc 0.0<br>oklch 0.35 0.080 300<span class="role">tint</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#aa8dde;color:#01130b">anemone3</div><div class="meta"><b>#aa8dde</b> Lc 48.0<br>oklch 0.70 0.120 300<span class="role">muted</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#c6b1f0;color:#01130b">anemone4 ★</div><div class="meta"><b>#c6b1f0</b> Lc 65.3<br>oklch 0.80 0.090 300<span class="role">macros, attributes</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#e3d7fb;color:#01130b">anemone5</div><div class="meta"><b>#e3d7fb</b> Lc 85.2<br>oklch 0.90 0.050 300<span class="role">bright</span>
+</div></div>
+</div>
+<h2>Bioluminescence: the light sources, used only where you are acting</h2><div class="tierhead"><div></div><div>dark: washes</div><div>bright: light</div></div>
+<div class="family"><div class="fname">biolume</div>
+<div class="sw "><div class="chip" style="background:#06343e;color:#dcebec">biolume1</div><div class="meta"><b>#06343e</b> Lc 0.0<br>oklch 0.30 0.050 218<span class="role">glow tint: other search matches</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#431f3c;color:#dcebec">biolume2</div><div class="meta"><b>#431f3c</b> Lc 0.0<br>oklch 0.30 0.070 335<span class="role">jelly tint: references to the symbol under the cursor</span>
+</div></div>
+<div class="gap"></div>
+<div class="sw "><div class="chip" style="background:#f59ae1;color:#01130b">biolume3</div><div class="meta"><b>#f59ae1</b> Lc 63.8<br>oklch 0.80 0.140 335<span class="role">jelly: matching bracket, references</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#76dffb;color:#01130b">biolume4 ★</div><div class="meta"><b>#76dffb</b> Lc 78.3<br>oklch 0.85 0.105 218<span class="role">glow: cursor</span>
+</div></div>
+<div></div></div>
+<h2>Neutrals</h2><div class="family plain"><div class="fname">abyss</div>
+<div class="sw core"><div class="chip" style="background:#01130b;color:#dcebec">abyss1 ★</div><div class="meta"><b>#01130b</b> Lc —<br>oklch 0.165 0.033 166<span class="role">background</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#001c12;color:#dcebec">abyss2</div><div class="meta"><b>#001c12</b> Lc 0.0<br>oklch 0.20 0.042 166<span class="role">floats, statusline, sidebars</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#02291c;color:#dcebec">abyss3</div><div class="meta"><b>#02291c</b> Lc 0.0<br>oklch 0.25 0.050 165<span class="role">cursorline</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#163b2c;color:#dcebec">abyss4</div><div class="meta"><b>#163b2c</b> Lc —<br>oklch 0.32 0.050 165<span class="role">selection, popup menu</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#2f5042;color:#dcebec">abyss5</div><div class="meta"><b>#2f5042</b> Lc 11.4<br>oklch 0.40 0.045 166<span class="role">borders, indent guides, popup selected</span>
+</div></div>
+</div>
+<div class="family plain"><div class="fname">foam</div>
+<div class="sw "><div class="chip" style="background:#6d7e7d;color:#dcebec">foam1</div><div class="meta"><b>#6d7e7d</b> Lc 31.7<br>oklch 0.58 0.020 190<span class="role">line numbers</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#9ab1ab;color:#01130b">foam2</div><div class="meta"><b>#9ab1ab</b> Lc 56.9<br>oklch 0.741 0.027 178.2<span class="role">comments</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#aeb4b4;color:#01130b">foam3</div><div class="meta"><b>#aeb4b4</b> Lc 60.6<br>oklch 0.766 0.007 195<span class="role">punctuation, operators</span>
+</div></div>
+<div class="sw "><div class="chip" style="background:#c6d4d5;color:#01130b">foam4</div><div class="meta"><b>#c6d4d5</b> Lc 78.3<br>oklch 0.86 0.015 200<span class="role">UI text</span>
+</div></div>
+<div class="sw core"><div class="chip" style="background:#dbeaeb;color:#01130b">foam5 ★</div><div class="meta"><b>#dbeaeb</b> Lc 91.8<br>oklch 0.926 0.016 202.2<span class="role">variables, parameters, strings, numbers, constants, field names</span>
+</div></div>
+</div>
+<h2>Negatives: soft, strong and flipped highlights</h2>
+<p><span class="demo" style="background:#3f1918;color:#aeb4b4">reef1 tint · error line</span><span class="demo" style="background:#612422;color:#dbeaeb">reef2 tint · stronger</span><span class="demo" style="background:#f66c6d;color:#001c12;font-weight:bold">reef3 negative · Lc </span><span class="demo" style="background:#f5b1aa;color:#001c12;font-weight:bold">reef4 negative · Lc </span></p>
+<p><span class="demo" style="background:#052f1a;color:#aeb4b4">emerald1 tint · diff add</span><span class="demo" style="background:#052941;color:#aeb4b4">sea1 tint · diff change</span><span class="demo" style="background:#06343e;color:#dbeaeb">glow tint · other matches</span><span class="demo" style="background:#431f3c;color:#dbeaeb">jelly tint · references</span><span class="demo" style="background:#76dffb;color:#001c12;font-weight:bold">glow negative · current match · Lc </span><span class="demo" style="background:#f59ae1;color:#001c12;font-weight:bold">jelly negative · Lc </span></p>
+<p class="note">Negatives need Lc 60+ to be readable, so they use step 4 or 5; the muted step 3 shades are too dark (Lc 42–53). Errors are the case to watch: reef3 as a negative is only Lc .</p>
+<h2>Neighbour separation (OKLab ΔE), worst pairs first</h2>
+<table><tr><th>pair</th><th>normal</th><th>protanopia</th><th>deuteranopia</th><th>tritanopia</th></tr>
+<tr><td>keyword|function→type</td><td class="ok">0.148</td><td class="ok">0.143</td><td class="ok">0.139</td><td class="warn">0.074</td></tr>
+<tr><td>field→function</td><td class="ok">0.197</td><td class="ok">0.178</td><td class="ok">0.161</td><td class="warn">0.079</td></tr>
+<tr><td>keyword→field</td><td class="ok">0.197</td><td class="ok">0.178</td><td class="ok">0.161</td><td class="warn">0.079</td></tr>
+<tr><td>keyword|function→string|value|variable</td><td class="ok">0.178</td><td class="warn">0.098</td><td class="warn">0.084</td><td class="ok">0.142</td></tr>
+<tr><td>package→type</td><td class="ok">0.114</td><td class="ok">0.110</td><td class="warn">0.099</td><td class="warn">0.087</td></tr>
+<tr><td>package→dot</td><td class="ok">0.118</td><td class="warn">0.093</td><td class="ok">0.119</td><td class="ok">0.121</td></tr>
+<tr><td>variable|value→type</td><td class="ok">0.163</td><td class="warn">0.093</td><td class="ok">0.139</td><td class="ok">0.167</td></tr>
+<tr><td>variable→field</td><td class="ok">0.136</td><td class="ok">0.106</td><td class="ok">0.138</td><td class="ok">0.148</td></tr>
+<tr><td>keyword→punctuation</td><td class="ok">0.209</td><td class="ok">0.181</td><td class="ok">0.129</td><td class="ok">0.184</td></tr>
+<tr><td>variable→dot</td><td class="ok">0.161</td><td class="ok">0.165</td><td class="ok">0.160</td><td class="ok">0.161</td></tr>
+<tr><td>keyword→package</td><td class="ok">0.259</td><td class="ok">0.250</td><td class="ok">0.236</td><td class="ok">0.161</td></tr>
+<tr><td>package→function</td><td class="ok">0.259</td><td class="ok">0.250</td><td class="ok">0.236</td><td class="ok">0.161</td></tr>
+</table><p class="note">Green ≥ 0.10, coral 0.07–0.10, red below 0.07.</p>
+<h2>How the tests work</h2>
+<div class="note" style="max-width:900px">
+<p><b style="color:#e2edee;font-weight:normal">Contrast (APCA Lc).</b> Measures how readable text is against its background, based on how the eye actually perceives lightness. It replaces the older WCAG ratio, which overrates dark colours on dark backgrounds. Targets come from the APCA guidelines:</p>
+<ul>
+<li><b>Lc 60+</b>: code text, the minimum for comfortable reading of normal-weight text.</li>
+<li><b>Lc 45+</b>: comments and punctuation, readable but meant to recede.</li>
+<li><b>Lc 30+</b>: line numbers and other non-text UI, visible but not read continuously.</li>
+<li><b>Lc 85–92</b> for strings: very bright text on a near-black background glows ("halation"), which tires the eyes, so the brightest text is capped.</li>
+</ul>
+<p>Each colour is also checked on the selection background, so text stays readable when selected.</p>
+<p><b style="color:#e2edee;font-weight:normal">Colour blindness (simulation).</b> Each colour is converted to how it looks with protanopia, deuteranopia and tritanopia, using the Machado et al. (2009) model at full severity, the worst case. About 8% of men and 0.5% of women have red-green colour blindness (protan or deutan); tritanopia is rare. Red-green colour-blind eyes still see lightness and blue versus yellow, so that is how neighbouring colours are kept apart.</p>
+<p><b style="color:#e2edee;font-weight:normal">Neighbour separation (OKLab ΔE).</b> The perceptual distance between colours of tokens that often sit next to each other, such as <code>store.Next(</code>. A difference of about 0.02 is just noticeable on a large patch; words are small, so they need much more to separate at a glance. The thresholds are our own, set by eye in the preview:</p>
+<ul>
+<li><b>≥ 0.10</b> for normal vision: clearly distinct at a glance.</li>
+<li><b>≥ 0.07</b> under colour blindness: distinguishable, and the best the optimiser could reach while keeping every colour within its contrast range.</li>
+</ul>
+<p>These tests catch problems; they cannot prove comfort. The final check is your eyes after a day of use.</p>
+</div>
+</body></html>
