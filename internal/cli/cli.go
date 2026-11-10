@@ -21,6 +21,7 @@ const usage = `usage: emerald-gen <command> [flags]
 commands:
   check     check the palette against its rules
   generate  render a template with the palette's colours
+  recolour  recolour an image onto a ramp of palette colours by lightness
   report    print APCA contrast and colour-blindness separation
 `
 
@@ -41,6 +42,8 @@ func Run(
 		return report(args[1:], stdout)
 	case "generate":
 		return generate(args[1:])
+	case "recolour":
+		return recolourImage(args[1:])
 	default:
 		return fmt.Errorf("unknown command %q\n%s", args[0], usage)
 	}

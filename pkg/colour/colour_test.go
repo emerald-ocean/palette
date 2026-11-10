@@ -123,3 +123,31 @@ func TestParseHex(t *testing.T) {
 		})
 	}
 }
+
+func TestOKLabRoundTrip(t *testing.T) {
+	tests := []struct {
+		name     string
+		hex      string
+		expected float64
+	}{
+		{name: "abyss", hex: "#01130b", expected: 0.165},
+		{name: "emerald", hex: "#54f9a3", expected: 0.876},
+		{name: "black", hex: "#000000", expected: 0},
+		{name: "white", hex: "#ffffff", expected: 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c, err := ParseHex(tt.hex)
+			if err != nil {
+				t.Fatalf("ParseHex() error = %v", err)
+			}
+			lab := c.OKLab()
+			if math.Abs(lab.L-tt.expected) > 0.005 {
+				t.Errorf("OKLab().L = %.3f, want %.3f", lab.L, tt.expected)
+			}
+			if got := lab.RGB().Hex(); got != tt.hex {
+				t.Errorf("OKLab().RGB().Hex() = %q, want %q", got, tt.hex)
+			}
+		})
+	}
+}

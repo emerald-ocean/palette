@@ -40,6 +40,14 @@ go run github.com/emerald-ocean/palette/cmd/emerald-gen@<version> generate -temp
 
 `report` prints the APCA lightness contrast (Lc) of every colour on each background, and the ΔE of every neighbour pair as seen with normal vision, protanopia, deuteranopia and tritanopia (Machado et al. 2009). It informs the rules but does not fail.
 
+`recolour` maps a JPEG or PNG onto a ramp of palette colours by lightness, so every pixel lands on the line through the ramp's colours in OKLab, and writes a PNG:
+
+```sh
+go run github.com/emerald-ocean/palette/cmd/emerald-gen@<version> recolour -in photo.jpg -out wave.png
+```
+
+`-ramp` lists the colours, darkest first (default `abyss1,abyss2,abyss3,emerald3,emerald4,foam5`). `-dark` and `-light` set the input lightness (OKLab L) that maps to the first and last colour (defaults 0.19 and 0.80).
+
 All commands take `-palette path/to/palette.json` to use a local file instead of the embedded palette.
 
 ## Development

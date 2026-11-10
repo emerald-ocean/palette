@@ -28,7 +28,33 @@ func (c OKLCH) lab() (float64, float64, float64) {
 }
 
 func (c OKLCH) linear() (float64, float64, float64) {
+	return labLinear(c.lab())
+}
+
+// OKLab is a colour in the OKLab space.
+type OKLab struct {
+	L float64
+	A float64
+	B float64
+}
+
+// OKLab converts c to OKLab.
+func (c RGB) OKLab() OKLab {
 	l, a, b := c.lab()
+	return OKLab{L: l, A: a, B: b}
+}
+
+// RGB converts c to sRGB, clipping it to the gamut.
+func (c OKLab) RGB() RGB {
+	r, g, b := labLinear(c.L, c.A, c.B)
+	return RGB{R: encode(r), G: encode(g), B: encode(b)}
+}
+
+func labLinear(
+	l float64,
+	a float64,
+	b float64,
+) (float64, float64, float64) {
 	lc := cube(l + 0.3963377774*a + 0.2158037573*b)
 	mc := cube(l - 0.1055613458*a - 0.0638541728*b)
 	sc := cube(l - 0.0894841775*a - 1.2914855480*b)
