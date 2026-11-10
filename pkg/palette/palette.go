@@ -14,19 +14,31 @@ var embedded []byte
 
 // Colour is a named palette colour.
 type Colour struct {
-	Name  string
-	Group string
-	OKLCH colour.OKLCH
-	Hex   string
-	Use   string
+	Name     string
+	Group    string
+	OKLCH    colour.OKLCH
+	Hex      string
+	Use      string
+	Core     bool
+	Contrast *Range
+}
+
+// Range is an allowed APCA lightness contrast (Lc) range. A zero Max means no upper limit.
+type Range struct {
+	Min float64 `json:"min"`
+	Max float64 `json:"max"`
 }
 
 // Rules are the readability rules a palette must meet.
 type Rules struct {
-	MinContrast float64     `json:"minContrast"`
-	MinDeltaE   float64     `json:"minDeltaE"`
-	Backgrounds []string    `json:"backgrounds"`
-	Neighbours  [][2]string `json:"neighbours"`
+	MinContrast          float64     `json:"minContrast"`
+	MinDeltaE            float64     `json:"minDeltaE"`
+	MinDeltaEColourBlind float64     `json:"minDeltaEColourBlind"`
+	Backgrounds          []string    `json:"backgrounds"`
+	Background           string      `json:"background"`
+	Selection            string      `json:"selection"`
+	SelectionAllowance   float64     `json:"selectionAllowance"`
+	Neighbours           [][2]string `json:"neighbours"`
 }
 
 // Palette is a set of named colours and the rules they must meet.
@@ -45,9 +57,11 @@ type document struct {
 }
 
 type documentColour struct {
-	OKLCH [3]float64 `json:"oklch"`
-	Hex   string     `json:"hex"`
-	Use   string     `json:"use"`
+	OKLCH    [3]float64 `json:"oklch"`
+	Hex      string     `json:"hex"`
+	Use      string     `json:"use"`
+	Core     bool       `json:"core"`
+	Contrast *Range     `json:"contrast"`
 }
 
 // Default returns the embedded Emerald Ocean palette.
@@ -75,11 +89,13 @@ func Parse(data []byte) (Palette, error) {
 				return Palette{}, fmt.Errorf("decode palette: colour %q defined twice", name)
 			}
 			p.Colours[name] = Colour{
-				Name:  name,
-				Group: group,
-				OKLCH: colour.OKLCH{L: c.OKLCH[0], C: c.OKLCH[1], H: c.OKLCH[2]},
-				Hex:   c.Hex,
-				Use:   c.Use,
+				Name:     name,
+				Group:    group,
+				OKLCH:    colour.OKLCH{L: c.OKLCH[0], C: c.OKLCH[1], H: c.OKLCH[2]},
+				Hex:      c.Hex,
+				Use:      c.Use,
+				Core:     c.Core,
+				Contrast: c.Contrast,
 			}
 		}
 	}

@@ -113,3 +113,81 @@ func TestCheck(t *testing.T) {
 		})
 	}
 }
+
+func testRulesDocument(
+	contrast string,
+	rules string,
+) string {
+	return `{
+	"name": "Test",
+	"space": "oklch",
+	"groups": {
+		"abyss": {
+			"abyss": {"oklch": [0.165, 0.033, 166], "hex": "#01130b"},
+			"current": {"oklch": [0.25, 0.050, 165], "hex": "#02291c"}
+		},
+		"foam": {"white": {"oklch": [0.95, 0.004, 250], "hex": "#eceff1", "contrast": ` + contrast + `}},
+		"kelp": {"verdigris": {"oklch": [0.77, 0.105, 135], "hex": "#97c37f"}},
+		"reef": {"coral": {"oklch": [0.80, 0.100, 35], "hex": "#f7a792"}}
+	},
+	"rules": ` + rules + `
+}`
+}
+
+func TestCheckLightnessContrastAndColourBlindness(t *testing.T) {
+	const selectionRules = `{"background": "abyss", "selection": "current", "selectionAllowance": 10}`
+	tests := []struct {
+		name     string
+		contrast string
+		rules    string
+		expected []string
+	}{
+		{
+			name:     "within range",
+			contrast: `{"min": 60, "max": 100}`,
+			rules:    selectionRules,
+		},
+		{
+			name:     "below minimum",
+			contrast: `{"min": 98}`,
+			rules:    selectionRules,
+			expected: []string{"white on abyss: Lc 96.6 is below 98.0"},
+		},
+		{
+			name:     "above maximum",
+			contrast: `{"min": 60, "max": 92}`,
+			rules:    selectionRules,
+			expected: []string{"white on abyss: Lc 96.6 is above 92.0"},
+		},
+		{
+			name:     "below minimum on the selection",
+			contrast: `{"min": 95}`,
+			rules:    `{"background": "abyss", "selection": "current"}`,
+			expected: []string{"white on current: Lc 94.3 is below 95.0"},
+		},
+		{
+			name:     "colour-blind neighbours too close",
+			contrast: `null`,
+			rules:    `{"minDeltaE": 0.10, "minDeltaEColourBlind": 0.07, "neighbours": [["verdigris", "coral"]]}`,
+			expected: []string{
+				"neighbours verdigris, coral with protanopia: ΔE 0.046 is below 0.070",
+				"neighbours verdigris, coral with deuteranopia: ΔE 0.038 is below 0.070",
+			},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			p, err := Parse([]byte(testRulesDocument(tt.contrast, tt.rules)))
+			if err != nil {
+				t.Fatalf("Parse() error = %v", err)
+			}
+			var got []string
+			for _, err := range p.Check() {
+				got = append(got, err.Error())
+			}
+			if strings.Join(got, "\n") != strings.Join(tt.expected, "\n") {
+				t.Errorf("Check() = %q, want %q", got, tt.expected)
+			}
+		})
+	}
+}
