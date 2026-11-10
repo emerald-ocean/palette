@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-const testTemplate = `bg = "{{.abyss}}" -- palette {{version}}`
+const testTemplate = `bg = "{{.abyss1}}" -- palette {{version}}`
 
 func TestRun(t *testing.T) {
 	dir := t.TempDir()
@@ -34,7 +34,7 @@ func TestRun(t *testing.T) {
 	}{
 		{name: "no command", args: nil, wantErr: "missing command"},
 		{name: "unknown command", args: []string{"paint"}, wantErr: `unknown command "paint"`},
-		{name: "check embedded", args: []string{"check"}, wantStdout: "all 15 colours meet the rules"},
+		{name: "check embedded", args: []string{"check"}, wantStdout: "all 44 colours meet the rules"},
 		{
 			name:       "check broken",
 			args:       []string{"check", "-palette", broken},

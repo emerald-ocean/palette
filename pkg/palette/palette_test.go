@@ -6,9 +6,8 @@ import (
 )
 
 const testRules = `"rules": {
-	"minContrast": 4.5,
+	"background": "abyss",
 	"minDeltaE": 0.10,
-	"backgrounds": ["abyss"],
 	"neighbours": [["white", "glow"]]
 }`
 
@@ -30,8 +29,8 @@ func TestDefault(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Default() error = %v", err)
 	}
-	if got := len(p.Colours); got != 15 {
-		t.Errorf("len(Default().Colours) = %d, want %d", got, 15)
+	if got := len(p.Colours); got != 44 {
+		t.Errorf("len(Default().Colours) = %d, want %d", got, 44)
 	}
 	if errs := p.Check(); len(errs) != 0 {
 		t.Errorf("Default().Check() = %v, want no errors", errs)
@@ -87,9 +86,9 @@ func TestCheck(t *testing.T) {
 			expected: []string{"glow: hex #76dffc does not match OKLCH {0.85 0.105 218} (#76dffb)"},
 		},
 		{
-			name:     "low contrast",
-			glow:     `{"oklch": [0.40, 0.05, 218], "hex": "#254e5a"}`,
-			expected: []string{"glow on abyss: contrast 2.11:1 is below 4.50:1"},
+			name:     "low lightness contrast",
+			glow:     `{"oklch": [0.40, 0.05, 218], "hex": "#254e5a", "contrast": {"min": 60}}`,
+			expected: []string{"glow on abyss: Lc 11.1 is below 60.0"},
 		},
 		{
 			name:     "neighbours too close",

@@ -3,110 +3,286 @@
   "space": "oklch",
   "groups": {
     "abyss": {
-      "abyss": {
+      "abyss1": {
         "oklch": [0.165, 0.033, 166],
         "hex": "#01130b",
-        "use": "editor, terminal, tmux background"
+        "use": "background",
+        "core": true
       },
-      "trench": {
+      "abyss2": {
         "oklch": [0.20, 0.042, 166],
         "hex": "#001c12",
-        "use": "cursorline, floats, statusline, tmux bar"
+        "use": "floats, statusline, sidebars"
       },
-      "current": {
+      "abyss3": {
         "oklch": [0.25, 0.050, 165],
         "hex": "#02291c",
-        "use": "visual selection, popup menu, borders"
+        "use": "cursorline"
       },
-      "shoal": {
-        "oklch": [0.45, 0.040, 166],
-        "hex": "#405d50",
-        "use": "line numbers, indent guides, popup selected"
+      "abyss4": {
+        "oklch": [0.32, 0.050, 165],
+        "hex": "#163b2c",
+        "use": "selection, popup menu"
+      },
+      "abyss5": {
+        "oklch": [0.40, 0.045, 166],
+        "hex": "#2f5042",
+        "use": "borders, indent guides, popup selected"
       }
     },
     "foam": {
-      "white": {
-        "oklch": [0.95, 0.004, 250],
-        "hex": "#eceff1",
-        "use": "type definitions, struct field names, strings"
+      "foam1": {
+        "oklch": [0.58, 0.020, 190],
+        "hex": "#6d7e7d",
+        "use": "line numbers",
+        "contrast": {"min": 30}
       },
-      "foam": {
-        "oklch": [0.88, 0.018, 215],
-        "hex": "#cbdbdf",
-        "use": "variables, parameters, default text"
+      "foam2": {
+        "oklch": [0.741, 0.027, 178.2],
+        "hex": "#9ab1ab",
+        "use": "comments",
+        "contrast": {"min": 45}
       },
-      "silt": {
-        "oklch": [0.70, 0.032, 166],
-        "hex": "#8ca59a",
-        "use": "punctuation, operators, comments"
+      "foam3": {
+        "oklch": [0.766, 0.007, 195],
+        "hex": "#aeb4b4",
+        "use": "punctuation, operators",
+        "contrast": {"min": 45}
+      },
+      "foam4": {
+        "oklch": [0.86, 0.015, 200],
+        "hex": "#c6d4d5",
+        "use": "UI text",
+        "contrast": {"min": 60}
+      },
+      "foam5": {
+        "oklch": [0.926, 0.016, 202.2],
+        "hex": "#dbeaeb",
+        "use": "variables, parameters, strings, numbers, constants, field names",
+        "core": true,
+        "contrast": {"min": 60, "max": 92}
+      }
+    },
+    "emerald": {
+      "emerald1": {
+        "oklch": [0.27, 0.060, 156.4],
+        "hex": "#052f1a",
+        "use": "tint: diff add line"
+      },
+      "emerald2": {
+        "oklch": [0.35, 0.080, 156.4],
+        "hex": "#074628",
+        "use": "tint: stronger highlight"
+      },
+      "emerald3": {
+        "oklch": [0.70, 0.150, 156.4],
+        "hex": "#35b977",
+        "use": "muted"
+      },
+      "emerald4": {
+        "oklch": [0.876, 0.182, 156.4],
+        "hex": "#54f9a3",
+        "use": "keywords, functions, builtin types, current search match, yank flash",
+        "core": true,
+        "contrast": {"min": 60}
+      },
+      "emerald5": {
+        "oklch": [0.94, 0.090, 156.4],
+        "hex": "#bafed3",
+        "use": "bright"
       }
     },
     "kelp": {
-      "emerald": {
-        "oklch": [0.86, 0.123, 160],
-        "hex": "#83eab5",
-        "use": "functions, methods, hint, diff add"
+      "kelp1": {
+        "oklch": [0.27, 0.060, 141.8],
+        "hex": "#142e11",
+        "use": "tint"
       },
-      "verdigris": {
-        "oklch": [0.77, 0.105, 135],
-        "hex": "#97c37f",
-        "use": "keywords, builtin types"
+      "kelp2": {
+        "oklch": [0.35, 0.080, 141.8],
+        "hex": "#1f451b",
+        "use": "tint"
       },
-      "seaglass": {
-        "oklch": [0.81, 0.085, 192],
-        "hex": "#7bd3cf",
-        "use": "custom types, package members"
+      "kelp3": {
+        "oklch": [0.66, 0.130, 141.8],
+        "hex": "#61a659",
+        "use": "muted"
       },
-      "glow": {
-        "oklch": [0.85, 0.105, 218],
-        "hex": "#76dffb",
-        "use": "cursor, search, yank, matching bracket, references, escapes, info"
+      "kelp4": {
+        "oklch": [0.769, 0.150, 141.8],
+        "hex": "#79cb70",
+        "use": "unassigned",
+        "core": true
       },
-      "tide": {
-        "oklch": [0.64, 0.090, 245],
-        "hex": "#5b92bf",
-        "use": "fields, packages"
+      "kelp5": {
+        "oklch": [0.86, 0.145, 141.8],
+        "hex": "#98e98f",
+        "use": "bright"
+      }
+    },
+    "lagoon": {
+      "lagoon1": {
+        "oklch": [0.27, 0.045, 199.6],
+        "hex": "#012d2f",
+        "use": "tint"
+      },
+      "lagoon2": {
+        "oklch": [0.35, 0.055, 199.6],
+        "hex": "#0a4346",
+        "use": "tint"
+      },
+      "lagoon3": {
+        "oklch": [0.70, 0.100, 199.6],
+        "hex": "#40b1b6",
+        "use": "muted"
+      },
+      "lagoon4": {
+        "oklch": [0.80, 0.118, 199.6],
+        "hex": "#47d4db",
+        "use": "types",
+        "core": true,
+        "contrast": {"min": 60}
+      },
+      "lagoon5": {
+        "oklch": [0.90, 0.100, 199.6],
+        "hex": "#87f2f8",
+        "use": "bright"
+      }
+    },
+    "sea": {
+      "sea1": {
+        "oklch": [0.27, 0.060, 243.6],
+        "hex": "#052941",
+        "use": "tint: diff change line"
+      },
+      "sea2": {
+        "oklch": [0.35, 0.080, 243.6],
+        "hex": "#083e61",
+        "use": "tint"
+      },
+      "sea3": {
+        "oklch": [0.64, 0.110, 243.6],
+        "hex": "#4a93ca",
+        "use": "muted"
+      },
+      "sea4": {
+        "oklch": [0.725, 0.115, 243.6],
+        "hex": "#61aee9",
+        "use": "packages",
+        "core": true,
+        "contrast": {"min": 45}
+      },
+      "sea5": {
+        "oklch": [0.819, 0.095, 234.9],
+        "hex": "#84cef9",
+        "use": "fields",
+        "contrast": {"min": 60}
       }
     },
     "reef": {
-      "coral": {
-        "oklch": [0.80, 0.100, 35],
-        "hex": "#f7a792",
-        "use": "numbers, booleans, nil, constants, warnings, TODO"
+      "reef1": {
+        "oklch": [0.27, 0.060, 24],
+        "hex": "#3f1918",
+        "use": "tint: error line, diff delete line"
       },
-      "urchin": {
-        "oklch": [0.66, 0.150, 20],
-        "hex": "#df676b",
-        "use": "errors, diff delete"
+      "reef2": {
+        "oklch": [0.35, 0.090, 24],
+        "hex": "#612422",
+        "use": "tint"
       },
-      "anemone": {
-        "oklch": [0.76, 0.090, 300],
-        "hex": "#baa4e2",
-        "use": "macros, attributes, decorators"
+      "reef3": {
+        "oklch": [0.70, 0.170, 22],
+        "hex": "#f66c6d",
+        "use": "errors",
+        "contrast": {"min": 45}
+      },
+      "reef4": {
+        "oklch": [0.823, 0.081, 26.1],
+        "hex": "#f5b1aa",
+        "use": "warnings, TODO",
+        "core": true,
+        "contrast": {"min": 60}
+      },
+      "reef5": {
+        "oklch": [0.90, 0.050, 30],
+        "hex": "#fed2cb",
+        "use": "bright"
+      }
+    },
+    "anemone": {
+      "anemone1": {
+        "oklch": [0.27, 0.060, 300],
+        "hex": "#2b1f3f",
+        "use": "tint"
+      },
+      "anemone2": {
+        "oklch": [0.35, 0.080, 300],
+        "hex": "#41305e",
+        "use": "tint"
+      },
+      "anemone3": {
+        "oklch": [0.70, 0.120, 300],
+        "hex": "#aa8dde",
+        "use": "muted"
+      },
+      "anemone4": {
+        "oklch": [0.80, 0.090, 300],
+        "hex": "#c6b1f0",
+        "use": "macros, attributes",
+        "core": true,
+        "contrast": {"min": 60}
+      },
+      "anemone5": {
+        "oklch": [0.90, 0.050, 300],
+        "hex": "#e3d7fb",
+        "use": "bright"
+      }
+    },
+    "biolume": {
+      "biolume1": {
+        "oklch": [0.30, 0.050, 218],
+        "hex": "#06343e",
+        "use": "glow tint: other search matches"
+      },
+      "biolume2": {
+        "oklch": [0.30, 0.070, 335],
+        "hex": "#431f3c",
+        "use": "jelly tint: references to the symbol under the cursor"
+      },
+      "biolume3": {
+        "oklch": [0.80, 0.140, 335],
+        "hex": "#f59ae1",
+        "use": "jelly: matching bracket, references",
+        "contrast": {"min": 60}
+      },
+      "biolume4": {
+        "oklch": [0.85, 0.105, 218],
+        "hex": "#76dffb",
+        "use": "glow: cursor",
+        "core": true,
+        "contrast": {"min": 60}
       }
     }
   },
   "rules": {
-    "minContrast": 4.5,
+    "background": "abyss1",
+    "selection": "abyss4",
+    "selectionAllowance": 10,
     "minDeltaE": 0.10,
-    "backgrounds": ["abyss", "current"],
+    "minDeltaEColourBlind": 0.07,
     "neighbours": [
-      ["tide", "emerald"],
-      ["foam", "tide"],
-      ["verdigris", "white"],
-      ["verdigris", "tide"],
-      ["tide", "seaglass"],
-      ["coral", "seaglass"],
-      ["white", "seaglass"],
-      ["verdigris", "coral"],
-      ["emerald", "white"],
-      ["foam", "verdigris"],
-      ["white", "coral"],
-      ["foam", "emerald"],
-      ["tide", "silt"],
-      ["verdigris", "silt"],
-      ["verdigris", "emerald"],
-      ["seaglass", "verdigris"]
-]
+      ["sea5", "emerald4"],
+      ["sea4", "emerald4"],
+      ["foam5", "sea5"],
+      ["emerald4", "foam5"],
+      ["emerald4", "sea5"],
+      ["emerald4", "sea4"],
+      ["sea4", "lagoon4"],
+      ["foam5", "lagoon4"],
+      ["emerald4", "lagoon4"],
+      ["emerald4", "foam3"],
+      ["sea4", "foam3"],
+      ["foam5", "foam3"]
+    ]
   }
 }

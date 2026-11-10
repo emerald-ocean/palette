@@ -31,10 +31,8 @@ type Range struct {
 
 // Rules are the readability rules a palette must meet.
 type Rules struct {
-	MinContrast          float64     `json:"minContrast"`
 	MinDeltaE            float64     `json:"minDeltaE"`
 	MinDeltaEColourBlind float64     `json:"minDeltaEColourBlind"`
-	Backgrounds          []string    `json:"backgrounds"`
 	Background           string      `json:"background"`
 	Selection            string      `json:"selection"`
 	SelectionAllowance   float64     `json:"selectionAllowance"`

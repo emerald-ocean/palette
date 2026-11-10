@@ -3,7 +3,6 @@ package palette
 import (
 	"fmt"
 	"math"
-	"slices"
 
 	"github.com/emerald-ocean/palette/pkg/colour"
 )
@@ -20,7 +19,6 @@ func (p Palette) Check() []error {
 			errs = append(errs, fmt.Errorf("%s: hex %s does not match OKLCH %v (%s)", name, c.Hex, c.OKLCH, got))
 		}
 	}
-	errs = append(errs, p.checkContrast()...)
 	errs = append(errs, p.checkLightnessContrast()...)
 	errs = append(errs, p.checkNeighbours()...)
 	return errs
@@ -81,43 +79,6 @@ func (p Palette) rgb(name string) (colour.RGB, error) {
 		return colour.RGB{}, fmt.Errorf("colour %s: %w", name, err)
 	}
 	return v, nil
-}
-
-func (p Palette) checkContrast() []error {
-	var errs []error
-	for _, bgName := range p.Rules.Backgrounds {
-		bg, ok := p.Colours[bgName]
-		if !ok {
-			errs = append(errs, fmt.Errorf("contrast: unknown background %q", bgName))
-			continue
-		}
-		bgRGB, err := colour.ParseHex(bg.Hex)
-		if err != nil {
-			errs = append(errs, fmt.Errorf("contrast background %s: %w", bgName, err))
-			continue
-		}
-		for _, name := range p.Names() {
-			c := p.Colours[name]
-			if c.Group == bg.Group || slices.Contains(p.Rules.Backgrounds, name) {
-				continue
-			}
-			fg, err := colour.ParseHex(c.Hex)
-			if err != nil {
-				errs = append(errs, fmt.Errorf("contrast foreground %s: %w", name, err))
-				continue
-			}
-			if ratio := colour.Contrast(fg, bgRGB); ratio < p.Rules.MinContrast {
-				errs = append(errs, fmt.Errorf(
-					"%s on %s: contrast %.2f:1 is below %.2f:1",
-					name,
-					bgName,
-					ratio,
-					p.Rules.MinContrast,
-				))
-			}
-		}
-	}
-	return errs
 }
 
 func (p Palette) checkNeighbours() []error {

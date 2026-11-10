@@ -145,13 +145,19 @@ func report(
 		rgb[name] = v
 	}
 
-	rows := [][]string{append([]string{"APCA Lc"}, p.Rules.Backgrounds...)}
+	var backgrounds []string
+	for _, bg := range []string{p.Rules.Background, p.Rules.Selection} {
+		if bg != "" {
+			backgrounds = append(backgrounds, bg)
+		}
+	}
+	rows := [][]string{append([]string{"APCA Lc"}, backgrounds...)}
 	for _, name := range p.Names() {
-		if slices.Contains(p.Rules.Backgrounds, name) {
+		if slices.Contains(backgrounds, name) {
 			continue
 		}
 		row := []string{name}
-		for _, bg := range p.Rules.Backgrounds {
+		for _, bg := range backgrounds {
 			row = append(row, fmt.Sprintf("%.1f", math.Abs(colour.APCA(rgb[name], rgb[bg]))))
 		}
 		rows = append(rows, row)

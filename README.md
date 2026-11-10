@@ -2,18 +2,26 @@
 
 The single source of truth for the Emerald Ocean colours: a dark palette taken from a breaking emerald wave, where green dominates the blue.
 
-`pkg/palette/palette.json` holds 15 colours in four groups (abyss, foam, kelp, reef). Each colour is defined in OKLCH, with its sRGB hex and what it is used for. The editor themes (`emerald-ocean.nvim`, `emerald-ocean-vscode`) are built from this file.
+`pkg/palette/palette.json` holds 44 colours in nine families. Each family is one hue (bioluminescence groups the light sources) with shades numbered from dark to light: accent families have two dark tints for backgrounds and highlights, then a muted, a core and a bright shade for text. Each colour is defined in OKLCH, with its sRGB hex, what it is used for, and whether it is the family's core. The editor themes (`emerald-ocean.nvim`, `emerald-ocean-vscode`) are built from this file.
 
-| Group | Colours |
-|-------|---------|
-| abyss | `#01130b` `#001c12` `#02291c` `#405d50` |
-| foam  | `#eceff1` `#cbdbdf` `#8ca59a` |
-| kelp  | `#83eab5` `#97c37f` `#7bd3cf` `#76dffb` `#5b92bf` |
-| reef  | `#f7a792` `#df676b` `#baa4e2` |
+| Family | Shades 1 → 5 (core in bold) |
+|--------|------|
+| abyss | **`#01130b`** `#001c12` `#02291c` `#163b2c` `#2f5042` |
+| foam | `#6d7e7d` `#9ab1ab` `#aeb4b4` `#c6d4d5` **`#dbeaeb`** |
+| emerald | `#052f1a` `#074628` `#35b977` **`#54f9a3`** `#bafed3` |
+| kelp | `#142e11` `#1f451b` `#61a659` **`#79cb70`** `#98e98f` |
+| lagoon | `#012d2f` `#0a4346` `#40b1b6` **`#47d4db`** `#87f2f8` |
+| sea | `#052941` `#083e61` `#4a93ca` **`#61aee9`** `#84cef9` |
+| reef | `#3f1918` `#612422` `#f66c6d` **`#f5b1aa`** `#fed2cb` |
+| anemone | `#2b1f3f` `#41305e` `#aa8dde` **`#c6b1f0`** `#e3d7fb` |
+| biolume | `#06343e` `#431f3c` `#f59ae1` **`#76dffb`** |
 
 ## Rules
 
-The `rules` section of `pkg/palette/palette.json` sets the readability rules every colour must meet: a minimum contrast against the backgrounds, and a minimum perceptual distance (OKLab ΔE) between colours that commonly sit next to each other in code.
+The `rules` section of `pkg/palette/palette.json` and each colour's optional `contrast` range set what every colour must meet:
+
+- **APCA lightness contrast:** colours with a `contrast` range must reach its `min` on the `background` (and `min` minus `selectionAllowance` on the `selection`), and stay under its `max`: 60 for code, 45 for comments, punctuation and packages, 30 for line numbers, at most 92 for the brightest text to limit halation.
+- **Neighbour separation:** colour pairs that sit next to each other in code must differ by at least `minDeltaE` (OKLab ΔE), and by `minDeltaEColourBlind` as seen with protanopia and deuteranopia.
 
 ## Generator
 
@@ -26,8 +34,8 @@ go run github.com/emerald-ocean/palette/cmd/emerald-gen@<version> generate -temp
 
 `check` fails if a colour is outside the sRGB gamut, its hex does not match its OKLCH value, or it breaks a contrast or neighbour rule. `generate` renders a [text/template](https://pkg.go.dev/text/template) with:
 
-- `{{.emerald}}`: a colour's hex value, e.g. `#83eab5`
-- `{{alpha .glow 0.16}}`: a colour with an alpha channel, e.g. `#76dffb29`
+- `{{.emerald4}}`: a colour's hex value, e.g. `#54f9a3`
+- `{{alpha .biolume4 0.16}}`: a colour with an alpha channel, e.g. `#76dffb29`
 - `{{version}}`: the palette version
 
 `report` prints the APCA lightness contrast (Lc) of every colour on each background, and the ΔE of every neighbour pair as seen with normal vision, protanopia, deuteranopia and tritanopia (Machado et al. 2009). It informs the rules but does not fail.
