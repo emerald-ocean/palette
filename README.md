@@ -66,7 +66,7 @@ Releases are automated with [release-please](https://github.com/googleapis/relea
 
 ## Images
 
-- `assets/emerald-wave.png`: a barrel wave recoloured so every pixel sits on the palette.
+- `assets/emerald-wave.png`: a barrel wave recoloured onto the palette with `emerald-gen recolour -in vortex.jpg -out assets/emerald-wave.png` (default ramp).
 - `assets/emerald-wave-avatar.jpg`: 800×800 crop of the same image, used as the organisation profile picture.
 
 Wave photo: ["Vortex" by Matt Hardy](https://unsplash.com/photos/zJ-Cj3nT6EU) on Unsplash, used under the Unsplash License.
