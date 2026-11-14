@@ -7,7 +7,7 @@
 :root {
   --abyss:#01130b; --trench:#02291c; --current:#163b2c; --shoal:#2f5042;
   --white:#dbeaeb; --foam:#c6d4d5; --silt:#9ab1ab; --punct:#aeb4b4; --var:#dbeaeb; --linenr:#6d7e7d;
-  --emerald:#54f9a3; --fnc:#54f9a3; --kw:#54f9a3; --kwdecl:#54f9a3; --tybuiltin:#54f9a3; --verdigris:#79cb70;
+  --emerald:#54f9a3; --fnc:#54f9a3; --kw:#54f9a3; --kwdecl:#35b977; --tybuiltin:#35b977; --verdigris:#79cb70; --str:#76dffb; --quote:#54f9a3; --esc:#54f9a3;
   --seaglass:#47d4db; --tydef:#47d4db; --pkg:#61aee9; --tide:#84cef9;
   --value:#dbeaeb; --coral:#f5b1aa; --urchin:#f66c6d; --anemone:#c6b1f0;
   --glow:#76dffb; --jelly:#f59ae1; --refbg:#431f3c; --searchbg:#06343e; --incsearch:#54f9a3; --yankbg:#54f9a3;
@@ -67,8 +67,10 @@ body { background:#050807; color:var(--foam); font:13.5px/1.6 "JetBrains Mono","
 .prd { color:var(--white); }
 .md { color:var(--pkg, var(--tide)); }
 .md { font-style:italic; }
-.st { color:var(--white); }
-.esc { color:var(--glow); }
+.st { color:var(--str, var(--white)); }
+.sq { color:var(--quote, inherit); }
+.pu.brp { color:var(--brp, var(--punct)); } .pu.brc { color:var(--brc, var(--punct)); }
+.esc { color:var(--esc, var(--glow)); }
 .nu { color:var(--value, var(--coral)); }
 .cn { color:var(--value, var(--coral)); }
 .cm { color:var(--silt); font-style:italic; }
@@ -90,7 +92,7 @@ body { background:#050807; color:var(--foam); font:13.5px/1.6 "JetBrains Mono","
     <div style="color:var(--silt)">go · utf-8</div><div class="pos" id="pos"></div>
   </div>
   <div class="cmd">/station</div>
-  <div class="moments" style="padding:0 .8rem .3rem">glow shown on: cursor on <b>N</b>ext · current search match · matching ( ) on the cursor line · references to Next (line 40) · yank flash (line 165) · active tmux window · escapes in strings</div>
+  <div class="moments" style="padding:0 .8rem .3rem">glow shown on: cursor on <b>N</b>ext · current search match · matching ( ) on the cursor line · references to Next (line 40) · yank flash (line 165) · active tmux window · strings</div>
   <div class="tmux"><div class="sess">ocean</div><div class="win on">1:nvim*</div><div class="win">2:zsh</div><div class="win">3:logs-</div><div class="grow"></div><div>emerald.local</div><div>Wed 4 Nov 14:32</div></div>
 </div>
 
@@ -407,7 +409,9 @@ const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&
 function render(tok, extra) {
   const v = esc(tok.v);
   if (tok.t === "cm") return `<span class="cm">${v.replace(/\b(TODO|FIXME|NOTE)\b/g, '<span class="todo">$1</span>')}</span>`;
-  if (tok.t === "st") return `<span class="st">${v.replace(/(\\.|%[-+# 0]*\d*(?:\.\d+)?[a-zA-Z%])/g, '<span class="esc">$1</span>')}</span>`;
+  const quotes = s => s.replace(/^(["`'])/, '<span class="sq">$1</span>').replace(/(["`'])$/, '<span class="sq">$1</span>');
+  if (tok.t === "st") return `<span class="st">${quotes(v.replace(/(\\.|%[-+# 0]*\d*(?:\.\d+)?[a-zA-Z%])/g, '<span class="esc">$1</span>'))}</span>`;
+  if (tok.t === "raw") return `<span class="st">${quotes(v)}</span>`;
   const cls = [tok.c || "", extra || ""].join(" ").trim();
   return cls ? `<span class="${cls}">${v}</span>` : v;
 }
@@ -453,7 +457,7 @@ const html = lines.map((code, i) => {
   const rowCls = ["ln", i === cur ? "cur" : "", vis.has(i) ? "vis" : "", i === yank ? "yank" : ""].join(" ");
   return `<div class="${rowCls}"><span class="sign ${sc}">${sg}</span><span class="nr">${i + 1}</span><span class="code">${code || " "}${d}</span></div>`;
 }).join("");
-document.getElementById("buf").innerHTML = html.replace(/(<div class="ln  ?cur[^"]*">[\s\S]*?<span class="fn ref">)Next</, "$1<span class=\"cursor\">N</span>ext<");
+document.getElementById("buf").innerHTML = html.replace(/<span class="pu( match)?">([()\[\]{}])<\/span>/g, (m, mt, ch) => `<span class="pu${mt || ""} ${"{}".includes(ch) ? "brc" : "brp"}">${ch}</span>`).replace(/(<div class="ln  ?cur[^"]*">[\s\S]*?<span class="fn ref">)Next</, "$1<span class=\"cursor\">N</span>ext<");
 document.getElementById("pos").textContent = `${cur + 1}:17  ${Math.round(((cur + 1) / raw.length) * 100)}%`;
 
 const groups = [
@@ -469,6 +473,8 @@ document.getElementById("legend").innerHTML = groups.map(([g, cs]) =>
     `<span title="${use}"><b style="background:var(--${n})"></b>${n} ${css.getPropertyValue("--" + n).trim()} <em>${use}</em></span>`).join("") + `</div>`).join("");
 }
 drawLegend();
+
+
 </script>
 </body>
 </html>
