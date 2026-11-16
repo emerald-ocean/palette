@@ -58,7 +58,7 @@
       "foam5": {
         "oklch": [0.926, 0.016, 202.2],
         "hex": "#dbeaeb",
-        "use": "variables, parameters, numbers, constants, field names",
+        "use": "variables, parameters, numbers, constants, field names, string quotes",
         "core": true,
         "contrast": {"min": 60, "max": 92}
       }
@@ -82,7 +82,7 @@
       "emerald4": {
         "oklch": [0.876, 0.182, 156.4],
         "hex": "#54f9a3",
-        "use": "control-flow keywords, functions, string quotes and escapes, current search match, yank flash",
+        "use": "control-flow keywords, functions, string escapes and format verbs, current search match, yank flash",
         "core": true,
         "contrast": {"min": 60}
       },
